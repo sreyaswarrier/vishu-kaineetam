@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vishu Kaineetam – Official Notice</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IM+Fell+English:ital@0;1&family=Noto+Serif+Malayalam:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --gold:       #D4A017;
+      --deep-gold:  #A0760A;
+      --pale-gold:  #FBF0C4;
+      --kerala-green: #2D6A4F;
+      --dark-green: #1B4332;
+      --kasavu:     #FFFBEA;
+      --coin:       #E8C547;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--dark-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'IM Fell English', serif;
+      overflow-x: hidden;
+      padding: 20px;
+    }
+
+    /* ── Ambient background ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 20% 20%, rgba(212,160,23,.18) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 80% 80%, rgba(45,106,79,.4) 0%, transparent 55%),
+        repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(255,255,255,.015) 30px, rgba(255,255,255,.015) 31px);
+      pointer-events: none;
+    }
+
+    /* ── Floating coins ── */
+    .coin {
+      position: fixed;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #f5d76e, var(--coin) 55%, #9a7000);
+      box-shadow: 0 2px 6px rgba(0,0,0,.4), inset 0 1px 2px rgba(255,255,255,.5);
+      opacity: 0;
+      animation: floatCoin linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .coin::after {
+      content: '₹';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #7a5500;
+      font-weight: 700;
+      font-family: sans-serif;
+    }
+    @keyframes floatCoin {
+      0%   { transform: translateY(110vh) rotate(0deg);   opacity: 0; }
+      5%   { opacity: .85; }
+      90%  { opacity: .85; }
+      100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+    }
+
+    /* ── Kanikonna petal shower ── */
+    .petal {
+      position: fixed;
+      width: 10px; height: 16px;
+      background: radial-gradient(ellipse at 100% 30%, #ffe066, #f0a500);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      opacity: 0;
+      animation: petalFall ease-in infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes petalFall {
+      0%   { transform: translateY(-5vh) rotate(0deg) translateX(0);   opacity: 0; }
+      8%   { opacity: .9; }
+      85%  { opacity: .7; }
+      100% { transform: translateY(105vh) rotate(180deg) translateX(40px); opacity: 0; }
+    }
+
+    /* ── The card ── */
+    .card {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 480px;
+      background: var(--kasavu);
+      border-radius: 4px;
+      box-shadow:
+        0 0 0 6px var(--gold),
+        0 0 0 10px var(--dark-green),
+        0 0 0 14px var(--gold),
+        0 30px 80px rgba(0,0,0,.6);
+      overflow: hidden;
+      animation: cardIn .9s cubic-bezier(.22,1,.36,1) both;
+    }
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(40px) scale(.96); }
+      to   { opacity: 1; transform: translateY(0)   scale(1); }
+    }
+
+    /* kasavu border stripe at top & bottom */
+    .kasavu-stripe {
+      height: 12px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--gold) 0px, var(--gold) 18px,
+        var(--pale-gold) 18px, var(--pale-gold) 24px,
+        var(--gold) 24px, var(--gold) 28px,
+        transparent 28px, transparent 32px
+      );
+    }
+
+    /* ── Header banner ── */
+    .header-band {
+      background: var(--kerala-green);
+      padding: 16px 24px 14px;
+      text-align: center;
+      position: relative;
+    }
+    .header-band::after {
+      content: '';
+      position: absolute;
+      bottom: -8px; left: 0; right: 0;
+      height: 8px;
+      background: var(--gold);
+      clip-path: polygon(0 0, 100% 0, 97% 100%, 3% 100%);
+    }
+
+    /* ── Seal ── */
+    .seal {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: conic-gradient(var(--gold) 0deg, #f5d76e 90deg, var(--gold) 180deg, #c8940a 270deg, var(--gold) 360deg);
+      border: 3px solid var(--deep-gold);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto;
+      box-shadow: 0 4px 16px rgba(0,0,0,.35), inset 0 2px 4px rgba(255,255,255,.3);
+      animation: sealSpin 20s linear infinite;
+      cursor: pointer;
+      transition: transform .2s;
+    }
+    .seal:hover { transform: scale(1.08); animation-play-state: paused; }
+    @keyframes sealSpin { to { filter: hue-rotate(10deg); } }
+    .seal-inner {
+      width: 54px; height: 54px;
+      border-radius: 50%;
+      background: var(--kerala-green);
+      border: 2px solid var(--deep-gold);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column;
+      font-size: 9px;
+      color: var(--pale-gold);
+      text-align: center;
+      font-family: 'Noto Serif Malayalam', serif;
+      line-height: 1.3;
+      font-weight: 700;
+    }
+
+    /* ── Body text ── */
+    .body-section {
+      padding: 28px 30px 20px;
+    }
+
+    .ref-line {
+      font-size: 9.5px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #8a7000;
+      border-bottom: 1px dashed #c9a52080;
+      padding-bottom: 10px;
+      margin-bottom: 18px;
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+    }
+
+    h1.title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--dark-green);
+      line-height: 1.2;
+      margin: 0 0 4px;
+    }
+    .subtitle {
+      font-size: 12px;
+      color: var(--deep-gold);
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+    }
+
+    .divider {
+      height: 2px;
+      margin: 16px 0;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--gold), var(--gold) 6px, transparent 6px, transparent 10px
+      );
+      border-radius: 1px;
+    }
+
+    .body-text {
+      font-size: 13.5px;
+      line-height: 1.75;
+      color: #2c2000;
+    }
+    .body-text .highlight {
+      color: var(--kerala-green);
+      font-weight: 700;
+      font-style: italic;
+    }
+    .body-text .amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--deep-gold);
+    }
+
+    /* ── Malayalam decorative text ── */
+    .malayalam {
+      font-family: 'Noto Serif Malayalam', serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--kerala-green);
+      text-align: center;
+      margin: 16px 0 6px;
+      letter-spacing: .04em;
+    }
+    .malayalam-sub {
+      font-family: 'Noto Serif Malayalam', serif;
+      font-size: 13px;
+      color: #8a7000;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    /* ── GPay block ── */
+    .gpay-block {
+      margin: 20px 0;
+      border: 2px solid var(--gold);
+      border-radius: 6px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #fff9e6, #fffdf5);
+      box-shadow: 0 2px 12px rgba(212,160,23,.2);
+      position: relative;
+    }
+    .gpay-header {
+      background: linear-gradient(90deg, var(--kerala-green), #1e5c3e);
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .gpay-logo {
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: -.03em;
+      font-family: 'Playfair Display', serif;
+    }
+    .gpay-logo span:nth-child(1) { color: #4285F4; }
+    .gpay-logo span:nth-child(2) { color: #EA4335; }
+    .gpay-logo span:nth-child(3) { color: #FBBC05; }
+    .gpay-logo span:nth-child(4) { color: #34A853; }
+    .gpay-logo span:nth-child(5) { color: #4285F4; }
+    .gpay-tag { font-size: 10px; color: #a8e6c4; font-style: italic; font-family: 'IM Fell English', serif; }
+
+    .gpay-body {
+      padding: 16px 18px;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+    .qr-box {
+      width: 72px; height: 72px;
+      border: 2px dashed var(--gold);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column;
+      flex-shrink: 0;
+      font-size: 8px;
+      color: #b09000;
+      text-align: center;
+      line-height: 1.4;
+      background: repeating-conic-gradient(#fffbe0 0% 25%, #fff3c0 0% 50%) 0 0 / 10px 10px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .qr-box:hover { border-color: var(--kerala-green); color: var(--kerala-green); transform: scale(1.05); }
+    .qr-icon { font-size: 22px; display: block; margin-bottom: 2px; }
+
+    .gpay-details { flex: 1; }
+    .gpay-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark-green);
+      letter-spacing: .06em;
+      background: linear-gradient(90deg, var(--deep-gold), var(--kerala-green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .gpay-placeholder {
+      font-size: 11px;
+      color: #a09000;
+      font-style: italic;
+      line-height: 1.5;
+    }
+    .gpay-upi { font-size: 10px; color: #7a8a80; margin-top: 4px; letter-spacing: .04em; }
+
+    /* ── Coins animation trigger button ── */
+    .coin-btn {
+      display: block;
+      width: 100%;
+      padding: 13px;
+      background: linear-gradient(135deg, var(--gold), #c8940a 50%, var(--gold));
+      background-size: 200% 100%;
+      border: none;
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: #3a1f00;
+      letter-spacing: .06em;
+      cursor: pointer;
+      transition: all .3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .coin-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.3), transparent);
+      transform: translateX(-100%);
+      transition: transform .5s;
+    }
+    .coin-btn:hover::before { transform: translateX(100%); }
+    .coin-btn:hover { background-position: 100% 0; letter-spacing: .1em; }
+    .coin-btn:active { transform: scale(.98); }
+
+    /* ── Footer ── */
+    .footer-section {
+      background: var(--dark-green);
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-sig {
+      font-size: 10px;
+      color: #8ebd9e;
+      font-style: italic;
+    }
+    .footer-year {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: .12em;
+    }
+
+    /* ── Confetti burst on button click ── */
+    .confetti-piece {
+      position: fixed;
+      width: 8px; height: 8px;
+      border-radius: 2px;
+      pointer-events: none;
+      z-index: 100;
+      animation: confettiFall 1.4s ease-in forwards;
+    }
+    @keyframes confettiFall {
+      0%   { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+      100% { opacity: 0; transform: translateY(300px) rotate(720deg) scale(.5); }
+    }
+
+    /* ── Tooltip on seal ── */
+    .seal-tip {
+      position: absolute;
+      background: var(--dark-green);
+      color: var(--pale-gold);
+      font-size: 10px;
+      padding: 6px 10px;
+      border-radius: 4px;
+      border: 1px solid var(--gold);
+      white-space: nowrap;
+      top: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s;
+      font-family: 'IM Fell English', serif;
+      font-style: italic;
+      z-index: 20;
+    }
+    .seal-wrapper { position: relative; display: inline-block; }
+    .seal-wrapper:hover .seal-tip { opacity: 1; }
+
+    /* ── Konna flower decorations ── */
+    .konna-row {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin: 8px 0;
+      font-size: 18px;
+      line-height: 1;
+      user-select: none;
+    }
+    .konna-row span { animation: sway 3s ease-in-out infinite; }
+    .konna-row span:nth-child(2) { animation-delay: .4s; }
+    .konna-row span:nth-child(3) { animation-delay: .8s; }
+    .konna-row span:nth-child(4) { animation-delay: 1.2s; }
+    .konna-row span:nth-child(5) { animation-delay: 1.6s; }
+    @keyframes sway {
+      0%, 100% { transform: rotate(-8deg); }
+      50%       { transform: rotate(8deg); }
+    }
+
+    /* ── Stamp ── */
+    .stamp {
+      display: inline-block;
+      border: 3px solid #c0392b;
+      color: #c0392b;
+      font-family: 'Playfair Display', serif;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .15em;
+      padding: 4px 10px;
+      transform: rotate(-7deg);
+      opacity: .75;
+      border-radius: 2px;
+      position: absolute;
+      top: 18px; right: 20px;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+
+    /* ── Notification badge ── */
+    .badge {
+      display: inline-block;
+      background: #c0392b;
+      color: white;
+      font-size: 9px;
+      font-family: sans-serif;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 99px;
+      vertical-align: middle;
+      margin-left: 6px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50%       { transform: scale(1.12); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating particles (generated by JS) -->
+
+  <div class="card">
+    <!-- Top kasavu stripe -->
+    <div class="kasavu-stripe"></div>
+
+    <!-- Header -->
+    <div class="header-band">
+      <div class="konna-row">
+        <span>🌼</span><span>🌼</span><span>🌼</span><span>🌼</span><span>🌼</span>
+      </div>
+      <div class="seal-wrapper" style="margin: 8px 0;">
+        <div class="seal">
+          <div class="seal-inner">
+            <div>വിഷു</div>
+            <div style="font-size:7px;">KAINEETAM</div>
+            <div style="font-size:7px;">AUTHORITY</div>
+          </div>
+        </div>
+        <div class="seal-tip">Official Seal of the Kaineetam Receiving Bureau</div>
+      </div>
+      <div class="konna-row" style="margin-top:8px;">
+        <span>🌼</span><span>🌼</span><span>🌼</span><span>🌼</span><span>🌼</span>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="body-section" style="position:relative;">
+      <div class="stamp">Pending ₹</div>
+
+      <div class="ref-line">
+        Ref. No: VISHU/KAINEETAM/2026/0001 &nbsp;|&nbsp; Date: 15 April 2026
+        <span class="badge">URGENT</span>
+      </div>
+
+      <h1 class="title">Accepting Vishu<br/>Kaineetam</h1>
+      <div class="subtitle">A Formal Notice of Receipt &amp; Expectation</div>
+
+      <div class="divider"></div>
+
+      <div class="malayalam">വിഷു കൈനീട്ടം</div>
+      <div class="malayalam-sub">Happy Vishu · വിഷു ആശംസകൾ ·</div>
+
+      <p class="body-text">
+        Pursuant to the ancient and <span class="highlight">sacred customs of the Malayali New Year</span>,
+        and in full recognition of the tradition of <em>Vishu Kaineetam</em>
+        — the noble practice wherein elders extend their outstretched hands
+        (<em>kaineetam</em>) to bestow blessings and currency upon deserving recipients —
+        the undersigned hereby formally announces availability for receipt of said blessings.
+      </p>
+
+      <p class="body-text" style="margin-top:12px;">
+        Acceptable denominations include, but are not limited to,
+        <span class="amount">₹1, ₹2, ₹5, ₹10</span> and all higher notes.
+        Digital transfers via GPay are warmly embraced in the spirit of
+        <span class="highlight">modernising tradition without losing its essence.</span>
+        No amount is considered inauspicious.
+      </p>
+
+      <div class="divider" style="margin-top:18px;"></div>
+
+      <!-- GPay block -->
+      <div class="gpay-block">
+        <div class="gpay-header">
+          <div class="gpay-logo">
+            <span>G</span><span>P</span><span>a</span><span>y</span>
+          </div>
+          <div class="gpay-tag">Kaineetam — Now Cashless &amp; Auspicious™</div>
+        </div>
+        <div class="gpay-body">
+          <div class="gpay-details">
+            <div class="gpay-number"><center>+91 9562350219</center></div>
+            <div class="gpay-placeholder"><center>Send it in through the GPay number here.<br/>The kaineetam will find its way. 🙏</div>
+            <div class="gpay-upi"><center>UPI · Instant · Auspicious</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="body-text" style="font-size:11.5px; color:#5a4800; margin-top:4px; font-style:italic;">
+        * As per Kerala Custom Act (informal), failure to give kaineetam may result in mild social awkwardness and one (1) disappointed face.
+        The Vishu Kani has been seen. The lamp is lit. Obligations are in effect.
+      </p>
+    </div>
+
+    <!-- CTA Button -->
+    <button class="coin-btn" id="coinBtn" onclick="celebrate()">
+      🌸 &nbsp; Send Kaineetam &nbsp; · &nbsp; ഇപ്പോൾ ☞ &nbsp; 🌸
+    </button>
+
+    <!-- Footer -->
+    <div class="footer-section">
+      <div class="footer-sig">
+        Issued with love &amp; strategic intent<br/>
+        <em>Sreyas S Warrier,</em>
+        <em>Chairperson, The Kaineetam Receiving Committee</em>
+      </div>
+      <div class="footer-year">VISHU<br/>2026</div>
+    </div>
+
+    <!-- Bottom kasavu stripe -->
+    <div class="kasavu-stripe"></div>
+  </div>
+
+  <script>
+    // ── Generate floating coins
+    (function() {
+      const colors = ['#E8C547','#D4A017','#f5d76e','#c8940a'];
+      for (let i = 0; i < 12; i++) {
+        const el = document.createElement('div');
+        el.className = 'coin';
+        el.style.left = Math.random() * 100 + 'vw';
+        el.style.width = el.style.height = (16 + Math.random() * 14) + 'px';
+        el.style.animationDuration = (8 + Math.random() * 12) + 's';
+        el.style.animationDelay = (Math.random() * 15) + 's';
+        el.style.background = `radial-gradient(circle at 35% 35%, #f5d76e, ${colors[i%colors.length]} 55%, #9a7000)`;
+        document.body.appendChild(el);
+      }
+    })();
+
+    // ── Generate petals
+    (function() {
+      for (let i = 0; i < 18; i++) {
+        const el = document.createElement('div');
+        el.className = 'petal';
+        el.style.left = Math.random() * 100 + 'vw';
+        el.style.animationDuration = (5 + Math.random() * 8) + 's';
+        el.style.animationDelay = (Math.random() * 18) + 's';
+        el.style.transform = `rotate(${Math.random()*360}deg)`;
+        const hue = 35 + Math.random() * 25;
+        el.style.background = `radial-gradient(ellipse at 50% 30%, hsl(${hue},100%,75%), hsl(${hue-10},90%,50%))`;
+        document.body.appendChild(el);
+      }
+    })();
+
+    // ── Celebrate function
+    function celebrate() {
+      const btn = document.getElementById('coinBtn');
+      const rect = btn.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top;
+
+      const confettiColors = ['#D4A017','#2D6A4F','#E8C547','#c0392b','#fff3b0','#f5d76e'];
+      for (let i = 0; i < 40; i++) {
+        const el = document.createElement('div');
+        el.className = 'confetti-piece';
+        el.style.left = (cx + (Math.random()-0.5)*200) + 'px';
+        el.style.top  = (cy + (Math.random()-0.5)*60) + 'px';
+        el.style.background = confettiColors[Math.floor(Math.random()*confettiColors.length)];
+        el.style.borderRadius = Math.random() > .5 ? '50%' : '2px';
+        el.style.width  = (6+Math.random()*10)+'px';
+        el.style.height = (6+Math.random()*10)+'px';
+        el.style.animationDelay = (Math.random()*0.3)+'s';
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 2000);
+      }
+
+      btn.textContent = '✅  Kaineetam En Route… 🙏';
+      btn.style.background = 'linear-gradient(135deg, #2D6A4F, #1B4332)';
+      btn.style.color = '#f5d76e';
+      setTimeout(() => {
+        btn.innerHTML = '🌸 &nbsp; Send Kaineetam &nbsp; · &nbsp; ഇപ്പോൾ ☞ &nbsp; 🌸';
+        btn.style.background = '';
+        btn.style.color = '';
+      }, 2800);
+    }
+  </script>
+</body>
+</html>
